@@ -57,6 +57,8 @@ var nextTrial = function() {
    target_color = randomColor();
    updateWord();
    counter++;
+
+   <!--should move the timer function below, for some reason it is printing multiple times, it is probably because i use the keypress function here, i should just swallow this in the keypress function below. DKURK 12.2.12 10AM-->
    $("#subject-id").keypress(function(e) {
       if (e.which == 13) {
          var end = new Date();
