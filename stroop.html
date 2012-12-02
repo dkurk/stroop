@@ -30,13 +30,48 @@ red
 
 <script src = "jquery.js"></script>
 <script>
+var counter = 0;
+
+var subtractTimes = function(d1, d2) {
+   return Math.abs(d1 - d2);
+}
+
+var randomText() = function() {
+   return 'red';
+}
+
+var randomColor() = function() {
+   return 'green';
+}
+
+var updateWord = function() {
+   $(".word").attr('class', 'word' + target_color);
+   $(".word").txt(target_text);
+}
+
+var nextTrial = function() {
+   var start = new Date();
+   target_text = randomText();
+   target_color = randomColor();
+   updateWord();
+   counter++;
+   var end = new Date();
+   var reaction_time = subtractTimes(start, end);
+   console.log("Time elapsed:" + reaction_time);
+}
+
+
 $("#subject-id").keypress(function(e) {
-   if (e.which == 13) {
+   if (e.which == 13 && counter == 0) {
       var sID = $("#subject-id")[0].value;
       console.log(sID);
       $("#subject-id")[0].value = "";
       $(".input-text").text("Answer:");
       $(".instructions").hide();
+      counter++;
+   }
+   else {
+      nextTrial();
    }
 })
 </script>
