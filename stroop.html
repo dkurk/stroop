@@ -1,0 +1,42 @@
+<!doctype html>
+
+<head>
+<style>
+.word {font-size:250%;}
+.red {color:red;}
+.blue {color:blue;}
+.green {color:green;}
+.yellow {color:yellow;}
+.purple {color:fuchsia;}
+.orange {color:orange;}
+</style>
+
+<div class = "instructions">
+<h3>This is the Stroop test portion of David Kurkovskiy's French Language Assessment + Perception test. Please enter your participant id in the box below, and click enter. You will then take an interactive Stroop test, in which you will be asked to indicate the color of a word on the screen.</h3>
+<p>
+<h4>As soon as you type in the paricipant ID and press enter, the instruction messages will disappear, and the test will begin. The bottom half of the screen will have a word that is written in a certain color. In the textbook, please type the color of the word (lower case is fine), and not the text of the word. Press enter as soon as you are done, and the next trial will subsequently begin. Thank you for participating in the study.
+</div>
+
+<hr>
+
+<div class="subject-box" align = "center">
+<div class="input-text">Participant ID:</div> <input type="text" id="subject-id"></input>
+</div>
+
+<br><br><br><br>
+<div class="word" align = "center">
+red
+</div>
+
+<script src = "jquery.js"></script>
+<script>
+$("#subject-id").keypress(function(e) {
+   if (e.which == 13) {
+      var sID = $("#subject-id")[0].value;
+      console.log(sID);
+      $("#subject-id")[0].value = "";
+      $(".input-text").text("Answer:");
+      $(".instructions").hide();
+   }
+})
+</script>
