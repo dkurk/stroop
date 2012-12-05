@@ -7,7 +7,7 @@
 .blue {color:blue;}
 .green {color:green;}
 .yellow {color:yellow;}
-.purple {color:fuchsia;}
+.purple {color:indigo;}
 .orange {color:orange;}
 </style>
 
@@ -29,6 +29,7 @@ red
 </div>
 
 <script src = "jquery.js"></script>
+
 <script>
 var counter = 0;
 var target_text = "";
@@ -39,11 +40,51 @@ var subtractTimes = function(d1, d2) {
 }
 
 var randomText = function() {
-   return 'red';
+   var words;
+
+   if (counter < 10) {
+      words = ['red', 'green', 'blue'];
+      console.log(words);
+   }
+   else if (counter < 20) {
+      words = ['red', 'green', 'blue', 'yellow'];
+      console.log(words);
+   }
+   else if (counter < 30) {
+      words = ['red', 'green', 'blue', 'yellow', 'purple'];
+      console.log(words);
+   }
+   else if (counter < 40) {
+      words = ['red', 'green', 'blue', 'yellow', 'purple'];
+      console.log(words);
+   }
+
+   return words[Math.floor(Math.random() * words.length)];
+
 }
 
 var randomColor = function() {
-   return 'green';
+   var colors;
+   
+   if (counter < 10) {
+      colors = ['red', 'green', 'blue'];
+      console.log(colors);
+   }
+   else if (counter < 20) {
+      colors = ['red', 'green', 'blue', 'yellow'];
+      console.log(colors);
+   }
+   else if (counter < 30) {
+      colors = ['red', 'green', 'blue', 'yellow', 'purple'];
+      console.log(colors);
+   }
+   else if (counter < 40) { 
+      colors = ['red', 'green', 'blue', 'yellow', 'purple'];
+      console.log(colors);
+   }
+
+   return colors[Math.floor(Math.random() * colors.length)];
+
 }
 
 var updateWord = function() {
@@ -84,4 +125,5 @@ $("#subject-id").keypress(function(e) {
       $("#subject-id")[0].value = "";
    }
 })
+
 </script>
