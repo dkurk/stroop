@@ -38,6 +38,8 @@ var counter = 0;
 var target_text = "";
 var target_color = "";
 var reactionTimes = [];
+var start;
+var end;
 
 var subtractTimes = function(d1, d2) {
    return Math.abs(d1 - d2);
@@ -48,19 +50,15 @@ var randomText = function() {
 
    if (counter < 10) {
       words = ['red', 'green', 'blue'];
-      console.log(words);
    }
    else if (counter < 20) {
       words = ['red', 'green', 'blue', 'yellow'];
-      console.log(words);
    }
    else if (counter < 30) {
       words = ['red', 'green', 'blue', 'yellow', 'purple'];
-      console.log(words);
    }
    else if (counter < 40) {
-      words = ['red', 'green', 'blue', 'yellow', 'purple'];
-      console.log(words);
+      words = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
    }
 
    return words[Math.floor(Math.random() * words.length)];
@@ -72,19 +70,15 @@ var randomColor = function() {
    
    if (counter < 10) {
       colors = ['red', 'green', 'blue'];
-      console.log(colors);
    }
    else if (counter < 20) {
       colors = ['red', 'green', 'blue', 'yellow'];
-      console.log(colors);
    }
    else if (counter < 30) {
       colors = ['red', 'green', 'blue', 'yellow', 'purple'];
-      console.log(colors);
    }
    else if (counter < 40) { 
-      colors = ['red', 'green', 'blue', 'yellow', 'purple'];
-      console.log(colors);
+      colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
    }
 
    return colors[Math.floor(Math.random() * colors.length)];
@@ -111,29 +105,46 @@ var nextTrial = function() {
    })
 }
 
-$("#subject-id").keypress(function(e) {
-   var start;
+$("#subject-id").keypress(function(e) { 
+   if (e.which == 13) {
+      if (counter == 0) {
+         var sID = $("#subject-id")[0].value;
+         console.log(sID);
+         reactionTimes.push(sID);
+         $("#subject-id")[0].value = "";
+         $(".input-text").text("Answer:");
+         $(".instructions").hide();
+         $(".word").show();
+         counter++;
+      }
+      else if (counter > 0 && counter < 40) {
+         if (target_text.length > 0 && $("#subject-id")[0].value == target_color) {
+            end = new Date();
+            var reaction_time = subtractTimes(start, end);
+            console.log("Time elapsed:" + " " + reaction_time);
+            reactionTimes.push(reaction_time);
+            $("#subject-id")[0].value = "";
+            counter++;
+            
+            if (counter < 40) {
+               updateWord();
+               start = new Date();
+            }
+            else if (counter >= 40) {
+               $(".word").hide();
+               var csvString = reactionTimes.join(",");
+               $(".results").text(csvString);
+            }
 
-   if (e.which == 13 && counter == 0) {
-      var sID = $("#subject-id")[0].value;
-      console.log(sID);
-      reactionTimes.append(sID);
-      $("#subject-id")[0].value = "";
-      $(".input-text").text("Answer:");
-      $(".instructions").hide();
-      $(".word").show();
-      counter++;
+         }
+         else if (target_text.length == 0) {
+            $("#subject-id")[0].value = "";
+            updateWord();
+            start = new Date();
+         }
+      }
    }
-   else if (e.which == 13 && counter > 0 && counter < 40) {
-      updateWord();
-      start = new Date();
-   }
-
-   nextTrial();
-   var ans = $("#subject-id")[0].value;
-   console.log(ans);
-   $("#subject-id")[0].value = "";
-
+      
 })
 
 </script>
