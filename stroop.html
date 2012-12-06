@@ -48,16 +48,19 @@ var subtractTimes = function(d1, d2) {
 var randomText = function() {
    var words;
 
-   if (counter < 10) {
+   if (counter < 2) {
+      words = ['the quick brown fox jumped over the lazy dog']
+   }
+   else if (counter < 11) {
       words = ['red', 'green', 'blue'];
    }
-   else if (counter < 20) {
+   else if (counter < 21) {
       words = ['red', 'green', 'blue', 'yellow'];
    }
-   else if (counter < 30) {
+   else if (counter < 31) {
       words = ['red', 'green', 'blue', 'yellow', 'purple'];
    }
-   else if (counter < 40) {
+   else if (counter < 41) {
       words = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
    }
 
@@ -68,16 +71,19 @@ var randomText = function() {
 var randomColor = function() {
    var colors;
    
-   if (counter < 10) {
+   if (counter < 2) {
+      colors = ['the quick brown fox jumped over the lazy dog']
+   }
+   else if (counter < 11) {
       colors = ['red', 'green', 'blue'];
    }
-   else if (counter < 20) {
+   else if (counter < 21) {
       colors = ['red', 'green', 'blue', 'yellow'];
    }
-   else if (counter < 30) {
+   else if (counter < 31) {
       colors = ['red', 'green', 'blue', 'yellow', 'purple'];
    }
-   else if (counter < 40) { 
+   else if (counter < 41) { 
       colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
    }
 
@@ -117,7 +123,7 @@ $("#subject-id").keypress(function(e) {
          $(".word").show();
          counter++;
       }
-      else if (counter > 0 && counter < 40) {
+      else if (counter > 0 && counter < 41) {
          if (target_text.length > 0 && $("#subject-id")[0].value == target_color) {
             end = new Date();
             var reaction_time = subtractTimes(start, end);
@@ -126,11 +132,11 @@ $("#subject-id").keypress(function(e) {
             $("#subject-id")[0].value = "";
             counter++;
             
-            if (counter < 40) {
+            if (counter < 41) {
                updateWord();
                start = new Date();
             }
-            else if (counter >= 40) {
+            else if (counter >= 41) {
                $(".word").hide();
                var csvString = reactionTimes.join(",");
                $(".results").text(csvString);
