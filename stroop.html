@@ -50,16 +50,7 @@ var randomText = function() {
 
    if (counter < 2) {
       words = ['the quick brown fox jumped over the lazy dog']
-   }
-   else if (counter < 11) {
-      words = ['red', 'green', 'blue'];
-   }
-   else if (counter < 21) {
-      words = ['red', 'green', 'blue', 'yellow'];
-   }
-   else if (counter < 31) {
-      words = ['red', 'green', 'blue', 'yellow', 'purple'];
-   }
+   }  
    else if (counter < 41) {
       words = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
    }
@@ -73,16 +64,7 @@ var randomColor = function() {
    
    if (counter < 2) {
       colors = ['the quick brown fox jumped over the lazy dog']
-   }
-   else if (counter < 11) {
-      colors = ['red', 'green', 'blue'];
-   }
-   else if (counter < 21) {
-      colors = ['red', 'green', 'blue', 'yellow'];
-   }
-   else if (counter < 31) {
-      colors = ['red', 'green', 'blue', 'yellow', 'purple'];
-   }
+   }  
    else if (counter < 41) { 
       colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
    }
@@ -94,6 +76,9 @@ var randomColor = function() {
 var updateWord = function() {
    target_text = randomText();
    target_color = randomColor();
+   while (target_text == target_color) {
+      target_text = randomText();
+   }
    $(".word").attr('class', 'word' + ' ' + target_color);
    $(".word").text(target_text);
 }
