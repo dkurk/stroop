@@ -25,7 +25,7 @@
 
 <br><br><br><br>
 <div class="word" align="center" style="display: none;">
-the test will begin when you next press enter. remember to type the color of the word written here in lowercase, not the text
+The test will begin when you next press enter. Remember to type the color of the word written here in lowercase, not the text. Colors and words will be either red, orange, yellow, green, blue, or purple. The very first test will be a sample phrase to callibrate your typing speed; please copy it over into the box.
 </div>
 
 <div class="results" align="center">
@@ -40,6 +40,7 @@ var target_color = "";
 var reactionTimes = [];
 var start;
 var end;
+var congruent_count = 0;
 
 var subtractTimes = function(d1, d2) {
    return Math.abs(d1 - d2);
@@ -51,7 +52,7 @@ var randomText = function() {
    if (counter < 2) {
       words = ['the quick brown fox jumped over the lazy dog']
    }  
-   else if (counter < 41) {
+   else if (counter < 52) {
       words = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
    }
 
@@ -65,7 +66,7 @@ var randomColor = function() {
    if (counter < 2) {
       colors = ['the quick brown fox jumped over the lazy dog']
    }  
-   else if (counter < 41) { 
+   else if (counter < 52) { 
       colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
    }
 
@@ -76,8 +77,8 @@ var randomColor = function() {
 var updateWord = function() {
    target_text = randomText();
    target_color = randomColor();
-   while (target_text == target_color) {
-      target_text = randomText();
+   if (target_text == target_color) {
+      congruent_count++;
    }
    $(".word").attr('class', 'word' + ' ' + target_color);
    $(".word").text(target_text);
@@ -108,7 +109,7 @@ $("#subject-id").keypress(function(e) {
          $(".word").show();
          counter++;
       }
-      else if (counter > 0 && counter < 41) {
+      else if (counter > 0 && counter < 52) {
          if (target_text.length > 0 && $("#subject-id")[0].value == target_color) {
             end = new Date();
             var reaction_time = subtractTimes(start, end);
@@ -117,12 +118,13 @@ $("#subject-id").keypress(function(e) {
             $("#subject-id")[0].value = "";
             counter++;
             
-            if (counter < 41) {
+            if (counter < 52) {
                updateWord();
                start = new Date();
             }
-            else if (counter >= 41) {
+            else if (counter >= 52) {
                $(".word").hide();
+               reactionTimes.push(congruent_count);
                var csvString = reactionTimes.join(",");
                $(".results").text(csvString);
             }
